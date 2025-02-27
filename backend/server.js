@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({ origin: "*" }));
 
-const SERPER_API_URL = "https://google.serper.dev/search"; // Serper API endpoint
+const SERPER_API_URL = "https://google.serper.dev/search"; 
 
 app.get("/search", async (req, res) => {
   const query = req.query.query;
@@ -16,14 +16,14 @@ app.get("/search", async (req, res) => {
   try {
     const response = await axios.post(
       SERPER_API_URL,
-      { q: query, num: 5 }, // Fetch top 5 research papers
+      { q: query, num: 5 }, 
       { headers: { "X-API-KEY": process.env.SERPER_API_KEY } }
     );
 
     const papers = response.data.organic.map((item) => ({
       title: item.title,
       url: item.link,
-      authors: item.snippet, // Assuming author details might be in the snippet
+      authors: item.snippet, 
       date: item.date || "Unknown",
     }));
 
